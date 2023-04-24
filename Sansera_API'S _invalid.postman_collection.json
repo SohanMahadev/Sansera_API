@@ -1,0 +1,1148 @@
+{
+	"info": {
+		"_postman_id": "72f7e379-28f0-4ff7-a9b2-33e1c96e09a9",
+		"name": "Sansera_API'S _invalid",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26749259"
+	},
+	"item": [
+		{
+			"name": "Authentication2",
+			"item": [
+				{
+					"name": "LogIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Emp_id is Matching\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message.emp_id).to.eql('emp000');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Member name is Matching\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message.memberName).to.eql('Admin');\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"ID is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('id');\r",
+									"});\r",
+									"console.log(jsonData.message.id)\r",
+									"\r",
+									"pm.test(\"Email is present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('email');\r",
+									"});\r",
+									"\r",
+									"var res = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", res.message.accessToken);\r",
+									"pm.environment.set(\"userId\", res.message.id);\r",
+									"pm.test(\"Admin Login\", function () {\r",
+									"pm.expect(jsonData.message.isAdmin).to.eql(true)\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"op\": \"login\",\r\n    \"emp_id\": \"emp000\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login_invalid_password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"op\": \"login\",\n    \"emp_id\": \"emp001\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login_invalid_username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"",
+									"var json=JSON.parse(responseBody)",
+									"pm.test(\"valiadte error message for invalid Password \",()=>{",
+									"pm.expect(json.message).to.eql(\"Invalid Employee ID or Password!\")",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"op\": \"login\",\n    \"emp_id\": \"emp000\",\n    \"password\": \"passwor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Emp_id is Matching\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message.message).to.eql('Logged Out Successfully');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"op\":\"logout\",\r\n    \"user_id\": \"{{userId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Raw_Materials3",
+			"item": [
+				{
+					"name": "Genetrate_batch_num",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();\r",
+									"pm.environment.set(\"batch_num\", res.message.batch_num);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"op\": \"add_raw_material\",\r\n    \"supplier_id\": \"{{supplier_id}}\",\r\n    \"material_code\": \"M2\",\r\n    \"material_grade\": \"A\",\r\n    \"heat_num\": \"AL4858\",\r\n    \"type\": \"Steel\",\r\n    \"total_weight\": 1200,\r\n    \"unit_num\": \"U-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/raw-materials",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"raw-materials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_raw_material_Total_weight_negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"var json=JSON.parse(responseBody)\r",
+									"pm.test(\"valiadte error message for negative total weight \",()=>{\r",
+									"pm.expect(json.message).to.eql(\"raw_material.add_raw_material:total_weight-should-be-a-number\")\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"op\": \"add_raw_material\",\r\n    \"supplier_id\": \"{{supplier_id}}\",\r\n    \"material_code\": \"M2\",\r\n    \"material_grade\": \"A\",\r\n    \"heat_num\": \"AL4858\",\r\n    \"type\": \"Steel\",\r\n    \"total_weight\": -1200,\r\n    \"unit_num\": \"U-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/raw-materials",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"raw-materials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pop_material_Bundle_weight is negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"var json=JSON.parse(responseBody)\r",
+									"pm.test(\"valiadte error message for negative bundle weight \",()=>{\r",
+									"pm.expect(json.message).to.eql(\"raw_material.pop_material:bundle_weight-should-be-a-number\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n \"op\": \"pop_material\", \r\n \"batch_num\": \"{{batch_num}}\",\r\n  \"unit_num\":\"{{unit_num}}\",\r\n \"bundle_weight\": -100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/raw-materials",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"raw-materials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_compartment_negative_remove_weight",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"var json=JSON.parse(responseBody)\r",
+									"pm.test(\"valiadte error message for negative removed weight \",()=>{\r",
+									"pm.expect(json.message).to.eql(\"raw_material.remove_compartment:removed_weight-should-be-a-number\")\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n \"op\": \"remove_compartment\", \r\n \"batch_num\": \"{{batch_num}}\", \r\n \"element_num\": [\"C1\",\"C2\"],\r\n \"removed_weight\": -200,\r\n \"unit_num\":\"{{unit_num}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/raw-materials",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"raw-materials"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Process-Line",
+			"item": [
+				{
+					"name": "add_process",
+					"item": [
+						{
+							"name": "component_count_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative component count  \",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.add_process:component_count-should-be-a-whole-number\")\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"op\": \"add_process\",\r\n \"batch_num\": \"{{batch_num}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"forge_machine_id\": \"{{forge_machine_id}}\",\r\n \"customer_id\": \"63ad93b4589165b9a1ce6aa8\",\r\n \"component_id\": \"HSSC\",\r\n \"component_count\": -4500,\r\n \"component_weight\": 345\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "component_weight_negative Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message negative component weight \",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.add_process:component_weight-should-be-a-number\")\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"op\": \"add_process\",\r\n \"batch_num\": \"{{batch_num}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"forge_machine_id\": \"{{forge_machine_id}}\",\r\n \"customer_id\": \"63ad93b4589165b9a1ce6aa8\",\r\n \"component_id\": \"HSSC\",\r\n \"component_count\": 4500,\r\n \"component_weight\": -345\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update_process_shearing",
+					"item": [
+						{
+							"name": "ok_end_billets_weight_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok_end_billets_weight  \",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_end_billets_weight-should-be-a-number\")\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"op\": \"update_process\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"stage_name\": \"Shearing\",\r\n \"ok_end_billets_weight\":-90,\r\n \"ok_component\": 30,\r\n \"ok_bits_count\":10,\r\n \"ok_bits_weight\":100,\r\n \"hold_materials_weight\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ok_component_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative component count  \",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_component-should-be-a-whole-number\")\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"op\": \"update_process\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"stage_name\": \"Shearing\",\r\n \"ok_end_billets_weight\": 90,\r\n \"ok_component\": -30,\r\n \"ok_bits_count\":10,\r\n \"ok_bits_weight\":100,\r\n \"hold_materials_weight\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ok_bits_count_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok_billets_count  \",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_bits_count-should-be-a-whole-number\")\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"op\": \"update_process\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"stage_name\": \"Shearing\",\r\n \"ok_end_billets_weight\": 90,\r\n \"ok_component\": 30,\r\n \"ok_bits_count\":-10,\r\n \"ok_bits_weight\":100,\r\n \"hold_materials_weight\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ok+bits_weight_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok billets weight\",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_bits_weight-should-be-a-number\")\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"op\": \"update_process\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"stage_name\": \"Shearing\",\r\n \"ok_end_billets_weight\": 90,\r\n \"ok_component\": 30,\r\n \"ok_bits_count\":10,\r\n \"ok_bits_weight\":-100,\r\n \"hold_materials_weight\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "hold_material_weight_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative hold material weight\",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:hold_materials_weight-should-be-a-number\")\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"op\": \"update_process\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"stage_name\": \"Shearing\",\r\n \"ok_end_billets_weight\": 90,\r\n \"ok_component\": 30,\r\n \"ok_bits_count\":10,\r\n \"ok_bits_weight\":100,\r\n \"hold_materials_weight\": -10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update_process_oiling",
+					"item": [
+						{
+							"name": "ok_component_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok component\",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_component-should-be-a-whole-number\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n \"op\": \"update_process\", \r\n \"unit_num\":\"{{unit_num}}\",\r\n \"process_name\": \"{{process}}\", \r\n \"stage_name\": \"Oiling\",\r\n \"ok_component\": -45000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update_process_forging",
+					"item": [
+						{
+							"name": "ok_component_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok component\",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_component-should-be-a-whole-number\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n \"op\": \"update_process\", \r\n \"unit_num\":\"{{unit_num}}\",\r\n \"process_name\": \"{{process}}\", \r\n \"stage_name\": \"Forging\",\r\n \"ok_component\": -45000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update_process_shot_Blasting",
+					"item": [
+						{
+							"name": "ok_component_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok component\",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_component-should-be-a-whole-number\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n \"op\": \"update_process\", \r\n \"unit_num\":\"{{unit_num}}\",\r\n \"process_name\": \"{{process}}\", \r\n \"stage_name\": \"Shot blasting\",\r\n \"ok_component\": -45000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update_process_shoot_peening",
+					"item": [
+						{
+							"name": "ok_component_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok component\",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_component-should-be-a-whole-number\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n \"op\": \"update_process\", \r\n \"unit_num\":\"{{unit_num}}\",\r\n \"process_name\": \"{{process}}\", \r\n \"stage_name\": \"Shot peening\",\r\n \"ok_component\": -45000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update_process_Visual",
+					"item": [
+						{
+							"name": "ok_component_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"var json=JSON.parse(responseBody)\r",
+											"pm.test(\"valiadte error message for negative ok component\",()=>{\r",
+											"pm.expect(json.message).to.eql(\"process-line.update_process:ok_component-should-be-a-whole-number\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n \"op\": \"update_process\", \r\n \"unit_num\":\"{{unit_num}}\",\r\n \"process_name\": \"{{process}}\", \r\n \"stage_name\": \"Visual\",\r\n \"ok_component\": -45000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
