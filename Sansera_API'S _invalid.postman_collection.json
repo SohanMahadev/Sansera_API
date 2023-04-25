@@ -445,6 +445,55 @@
 					"name": "add_process",
 					"item": [
 						{
+							"name": "generate_forge_machine_id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"var res = JSON.parse(responseBody);",
+											"pm.environment.set(\"forge_machine_id\", res.message[1]._id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"op\": \"list_forge_machines\",\n \"unit_num\": \"{{unit_num}}\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/forge-machine",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"forge-machine"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "add_process_to_generate_processname",
 							"event": [
 								{
@@ -549,7 +598,7 @@
 							"response": []
 						},
 						{
-							"name": "component_weight_negative Copy",
+							"name": "component_weight_negative",
 							"event": [
 								{
 									"listen": "test",
@@ -602,55 +651,6 @@
 									],
 									"path": [
 										"process-line"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "generate_forge_machine_id",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"",
-											"var res = JSON.parse(responseBody);",
-											"pm.environment.set(\"forge_machine_id\", res.message[1]._id);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n \"op\": \"list_forge_machines\",\n \"unit_num\": \"{{unit_num}}\"\n}\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/forge-machine",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"forge-machine"
 									]
 								}
 							},
