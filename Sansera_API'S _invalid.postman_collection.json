@@ -445,6 +445,54 @@
 					"name": "add_process",
 					"item": [
 						{
+							"name": "add_process_to_generate_processname",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var res = JSON.parse(responseBody);",
+											"pm.environment.set(\"process\", res.message.process_name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"op\": \"add_process\",\n \"batch_num\": \"{{batch_num}}\",\n \"unit_num\":\"{{unit_num}}\",\n \"forge_machine_id\": \"{{forge_machine_id}}\",\n \"customer_id\": \"63ad93b4589165b9a1ce6aa8\",\n \"component_id\": \"HSSC\",\n \"component_count\": \"4500\",\n \"component_weight\": 345\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/process-line",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"process-line"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "component_count_negative",
 							"event": [
 								{
@@ -554,6 +602,55 @@
 									],
 									"path": [
 										"process-line"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "generate_forge_machine_id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"var res = JSON.parse(responseBody);",
+											"pm.environment.set(\"forge_machine_id\", res.message[1]._id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"op\": \"list_forge_machines\",\n \"unit_num\": \"{{unit_num}}\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/forge-machine",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"forge-machine"
 									]
 								}
 							},
