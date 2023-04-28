@@ -1283,8 +1283,6 @@
 									"\r",
 									"console.log(extractedStr); \r",
 									"console.log(current_date);\r",
-									"\r",
-									"\r",
 									"pm.test(\"Device map is Present\", function () {\r",
 									"    pm.expect(jsonData.message[0]).to.have.property('device_map');\r",
 									"});\r",
@@ -4733,7 +4731,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"op\": \"create\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"resolver_id\": \"628787de55d104aab2fcc695\",\r\n \"stage\": \"Billet punching\"\r\n}\r\n\r\n",
+							"raw": "{\r\n \"op\": \"create\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\":\"{{unit_num}}\",\r\n \"resolver_id\": \"{{userId}}\",\r\n \"stage\": \"Billet punching\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4824,7 +4822,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"op\": \"get_request\",\r\n \"resolver_id\": \"628787de55d104aab2fcc695\",\r\n \"task_state\": [\"REQUESTED\"],\r\n \"unit_num\": \"{{unit_num}}\"\r\n}\r\n",
+							"raw": "{\r\n \"op\": \"get_request\",\r\n \"resolver_id\": \"{{userId}}\",\r\n \"task_state\": [\"REQUESTED\"],\r\n \"unit_num\": \"{{unit_num}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4914,7 +4912,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"op\": \"update\",\r\n \"_id\": \"{{task_id}}\",\r\n \"task_state\": \"FULFILLED\",\r\n \"resolver_id\": \"628787de55d104aab2fcc695\"\r\n}\r\n",
+							"raw": "{\r\n \"op\": \"update\",\r\n \"_id\": \"{{task_id}}\",\r\n \"task_state\": \"FULFILLED\",\r\n \"resolver_id\": \"{{userId}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
