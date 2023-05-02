@@ -4889,7 +4889,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"op\": \"create\",\n    \"resolver_id\": \"{{token}}\",\n    \"unit_num\": \"{{unit_num}}\",\n    \"stage\": \"Billet punching\"\n}",
+									"raw": "{\n    \"op\": \"create\",\n    \"resolver_id\": \"{{userId}}\",\n    \"unit_num\": \"{{unit_num}}\",\n    \"stage\": \"Billet punching\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4946,7 +4946,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"op\": \"create\",\n    \"process_name\": \"{{process}}\",\n    \"resolver_id\": \"{{token}}\",\n    \"stage\": \"Billet punching\"\n}",
+									"raw": "{\n    \"op\": \"create\",\n    \"process_name\": \"{{process}}\",\n    \"resolver_id\": \"{{userId}}\",\n    \"stage\": \"Billet punching\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5003,7 +5003,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"op\": \"create\",\n    \"resolver_id\": \"{{token}}\",\n    \"unit_num\": \"{{unit_num}}\",\n    \"stage\": \"Billet punching\"\n}",
+									"raw": "{\n    \"op\": \"create\",\n    \"resolver_id\": \"{{userId}}\",\n    \"unit_num\": \"{{unit_num}}\",\n    \"stage\": \"Billet punching\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5060,7 +5060,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"op\": \"create\",\n    \"process_name\": \"{{process}}\",\n    \"resolver_id\": \"{{token}}\",\n    \"unit_num\": \"{{unit_num}}\"\n}",
+									"raw": "{\n    \"op\": \"create\",\n    \"process_name\": \"{{process}}\",\n    \"resolver_id\": \"{{userId}}\",\n    \"unit_num\": \"{{unit_num}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5123,7 +5123,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n \"op\": \"get_request\",\r\n \"resolver_id\": \"628787de55d104aab2fcc695\",\r\n \"task_state\": [\"REQUESTED\"]\r\n \r\n}\r\n",
+									"raw": "{\r\n \"op\": \"get_request\",\r\n \"resolver_id\": \"{{userId}}\",\r\n \"task_state\": [\"REQUESTED\"]\r\n \r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5227,7 +5227,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n \"op\": \"get_request\",\n \"resolver_id\": \"628787de55d104aab2fcc695\",\n  \"unit_num\":\"{{unit_num}}\"\n \n}\n",
+									"raw": "{\n \"op\": \"get_request\",\n \"resolver_id\": \"{{userId}}\",\n  \"unit_num\":\"{{unit_num}}\"\n \n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5281,7 +5281,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n \"op\": \"create\",\n \"process_name\": \"{{process}}\",\n \"unit_num\":\"{{unit_num}}\",\n \"resolver_id\": \"628787de55d104aab2fcc695\",\n \"stage\": \"Billet punching\"\n}\n",
+									"raw": "{\n \"op\": \"create\",\n \"process_name\": \"{{process}}\",\n \"unit_num\":\"{{unit_num}}\",\n \"resolver_id\": \"{{userId}}\",\n \"stage\": \"Billet punching\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5339,7 +5339,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n \"op\": \"update\",\r\n \r\n \"task_state\": \"FULFILLED\",\r\n \"resolver_id\": \"628787de55d104aab2fcc695\"\r\n}\r\n",
+									"raw": "{\r\n \"op\": \"update\",\r\n \r\n \"task_state\": \"FULFILLED\",\r\n \"resolver_id\": \"{{userId}}\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5397,7 +5397,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"op\": \"update\",\n    \"_id\": \"{{task_id}}\",\n    \"resolver_id\": \"628787de55d104aab2fcc695\"\n}",
+									"raw": "{\n    \"op\": \"update\",\n    \"_id\": \"{{task_id}}\",\n    \"resolver_id\": \"{{userId}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
