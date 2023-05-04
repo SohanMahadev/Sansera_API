@@ -5903,7 +5903,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
+									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"var res = JSON.parse(responseBody);\r",
@@ -6016,6 +6016,66 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{ \r\n \"op\": \"get_batch_reasons\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/batch-rejection",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"batch-rejection"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_batch_reason",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"rejection_reason is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('rejection_reason');",
+									"});",
+									"pm.test(\"id is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('_id');",
+									"});",
+									"pm.test(\"__v is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('__v');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"op\": \"update_batch_reason\",\n\"_id\": \"{{rejection_id}}\",\n\"rejection_reason\": \"Defective material reason {{$randomInt}} updated\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
