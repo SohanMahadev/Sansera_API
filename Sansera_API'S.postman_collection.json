@@ -798,6 +798,8 @@
 									"pm.test(\"id num is Present inside fifo\", function () {\r",
 									"    pm.expect(jsonData.message.fifo[0]).to.have.property('_id');\r",
 									"});\r",
+									"var res = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"status\", res.message.status);\r",
 									"\r",
 									""
 								],
@@ -1616,15 +1618,12 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"pm.test(\"Status number is Matching\", function () {\r",
+									"pm.test(\"Status  is Matching\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.message[0].status).to.eql(\"NEW\");\r",
-									"});\r",
-									"pm.test(\"Status is Matching\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.message[1].status).to.eql(\"NEW\");\r",
+									"    pm.expect(jsonData.message[0].status).to.eql(pm.environment.get(\"status\"));\r",
 									"\r",
 									"});\r",
+									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
@@ -1746,7 +1745,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"op\": \"list_raw_material_by_status\",\r\n \"status\": [\"NEW\",\"APPROVED\"],\r\n \"unit_num\": \"{{unit_num}}\"\r\n}",
+							"raw": "{\r\n \"op\": \"list_raw_material_by_status\",\r\n \"status\": \"{{status}}\",\r\n \"unit_num\": \"{{unit_num}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
