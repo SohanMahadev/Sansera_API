@@ -4977,7 +4977,7 @@
 					"response": []
 				},
 				{
-					"name": "get-process Copy",
+					"name": "get-process",
 					"event": [
 						{
 							"listen": "test",
@@ -5095,6 +5095,14 @@
 									"\r",
 									"pm.test(\"ok_bits_weight is Present inside process\", function () {\r",
 									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_weight');\r",
+									"});\r",
+									"if (Object.keys(jsonData.message.process[8].fifo).length === 0) {\r",
+									"    tests1 = false;\r",
+									"} else {\r",
+									"    tests1 = true;\r",
+									"}\r",
+									"pm.test(\"fifo contains some data\", function () {\r",
+									"    pm.expect(tests1).to.eql(true);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5578,7 +5586,7 @@
 					"response": []
 				},
 				{
-					"name": "get-process Copy",
+					"name": "get-process",
 					"event": [
 						{
 							"listen": "test",
@@ -5696,6 +5704,14 @@
 									"\r",
 									"pm.test(\"ok_bits_weight is Present inside process\", function () {\r",
 									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_weight');\r",
+									"});\r",
+									"if (Object.keys(jsonData.message.process[8].fifo).length === 0) {\r",
+									"    tests1 = false;\r",
+									"} else {\r",
+									"    tests1 = true;\r",
+									"}\r",
+									"pm.test(\"fifo is empty\", function () {\r",
+									"    pm.expect(tests1).to.eql(false);\r",
 									"});"
 								],
 								"type": "text/javascript"
