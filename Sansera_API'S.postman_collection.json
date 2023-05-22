@@ -4076,6 +4076,171 @@
 					"response": []
 				},
 				{
+					"name": "update_process_finished_component_count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"process name  is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('process_name');",
+									"});",
+									"pm.test(\"batch num  is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('batch_num');",
+									"});",
+									"pm.test(\"forge machine id  is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('forge_machine_id');",
+									"});",
+									"pm.test(\"die num  is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('die_num');",
+									"});",
+									"",
+									"pm.test(\"supplier is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('supplier');",
+									"});",
+									"pm.test(\"heat num is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('heat_num');",
+									"});",
+									"pm.test(\"customer is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('customer');",
+									"});",
+									"pm.test(\"component_id is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('component_id');",
+									"});",
+									"pm.test(\"component weight is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('component_weight');",
+									"});",
+									"pm.test(\"component count is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('component_count');",
+									"});",
+									"pm.test(\"finished component is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('finished_component');",
+									"});",
+									"pm.test(\"batch num used is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('batch_num_used');",
+									"});",
+									"pm.test(\"status is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('status');",
+									"});",
+									"pm.test(\"process array is Present\", function () {",
+									"    pm.expect(jsonData.message).to.have.property('process');",
+									"});",
+									"if (jsonData.message.process.length === 0) {",
+									"    result = false;",
+									"} else {",
+									"    result = true;",
+									"}",
+									"pm.test(\"process array contains some data\", function () {",
+									"pm.expect(result).to.eql(true);",
+									"});",
+									"if (Object.keys(jsonData.message.process).length === 0) {",
+									"    tests = false;",
+									"} else {",
+									"    tests = true;",
+									"}",
+									"pm.test(\"Process contains some data\", function () {",
+									"    pm.expect(tests).to.eql(true);",
+									"});",
+									"pm.test(\"stage_name is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('stage_name');",
+									"});",
+									"pm.test(\"order  is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('order');",
+									"});",
+									"pm.test(\"ok_component is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_component');",
+									"});",
+									"pm.test(\"sub_stage is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('sub_stage');",
+									"});",
+									"",
+									"pm.test(\"input_stage is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('input_stage');",
+									"});",
+									"",
+									"pm.test(\"output_stage is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('output_stage');",
+									"});",
+									"",
+									"pm.test(\"input_enabled is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('input_enabled');",
+									"});",
+									"",
+									"pm.test(\"fifo is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('fifo');",
+									"});",
+									"",
+									"pm.test(\"last_popped_element is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('last_popped_element');",
+									"});",
+									"",
+									"pm.test(\"hold_materials_weight is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('hold_materials_weight');",
+									"});",
+									"",
+									"pm.test(\"ok_end_billets_weight is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_end_billets_weight');",
+									"});",
+									"",
+									"pm.test(\"ok_bits_count is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_count');",
+									"});",
+									"",
+									"pm.test(\"ok_bits_weight is Present inside process\", function () {",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_weight');",
+									"});",
+									"pm.test(\"ok_component  is Matching\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message.process[3].ok_component).to.eql(45000);",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"op\": \"update_process\",\n    \"process_name\": \"{{process}}\",\n    \"unit_num\": \"{{unit_num}}\",\n    \"status\": \"FINISHED\",\n    \"finished_component\": 45000,\n    \"component_count\": 45000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/process-line",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"process-line"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Push_element",
 					"event": [
 						{
@@ -4810,6 +4975,165 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get-process Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"process name  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('process_name');\r",
+									"});\r",
+									"pm.test(\"batch num  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('batch_num');\r",
+									"});\r",
+									"pm.test(\"forge machine id  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('forge_machine_id');\r",
+									"});\r",
+									"pm.test(\"die num  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('die_num');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"supplier is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('supplier');\r",
+									"});\r",
+									"pm.test(\"heat num is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('heat_num');\r",
+									"});\r",
+									"pm.test(\"customer is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('customer');\r",
+									"});\r",
+									"pm.test(\"component_id is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('component_id');\r",
+									"});\r",
+									"pm.test(\"component weight is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('component_weight');\r",
+									"});\r",
+									"pm.test(\"component count is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('component_count');\r",
+									"});\r",
+									"pm.test(\"finished component is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('finished_component');\r",
+									"});\r",
+									"pm.test(\"batch num used is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('batch_num_used');\r",
+									"});\r",
+									"pm.test(\"status is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('status');\r",
+									"});\r",
+									"pm.test(\"process array is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('process');\r",
+									"});\r",
+									"if (jsonData.message.process.length === 0) {\r",
+									"    result = false;\r",
+									"} else {\r",
+									"    result = true;\r",
+									"}\r",
+									"pm.test(\"process array contains some data\", function () {\r",
+									"pm.expect(result).to.eql(true);\r",
+									"});\r",
+									"if (Object.keys(jsonData.message.process).length === 0) {\r",
+									"    tests = false;\r",
+									"} else {\r",
+									"    tests = true;\r",
+									"}\r",
+									"pm.test(\"Process contains some data\", function () {\r",
+									"    pm.expect(tests).to.eql(true);\r",
+									"});\r",
+									"pm.test(\"stage_name is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('stage_name');\r",
+									"});\r",
+									"pm.test(\"order  is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('order');\r",
+									"});\r",
+									"pm.test(\"ok_component is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_component');\r",
+									"});\r",
+									"pm.test(\"sub_stage is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('sub_stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"input_stage is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('input_stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"output_stage is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('output_stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"input_enabled is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('input_enabled');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"fifo is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('fifo');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"last_popped_element is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('last_popped_element');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"hold_materials_weight is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('hold_materials_weight');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"ok_end_billets_weight is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_end_billets_weight');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"ok_bits_count is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_count');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"ok_bits_weight is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_weight');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"op\": \"get_process\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\": \"{{unit_num}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/process-line",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"process-line"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -5248,6 +5572,165 @@
 							],
 							"path": [
 								"operator-task-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-process Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"process name  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('process_name');\r",
+									"});\r",
+									"pm.test(\"batch num  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('batch_num');\r",
+									"});\r",
+									"pm.test(\"forge machine id  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('forge_machine_id');\r",
+									"});\r",
+									"pm.test(\"die num  is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('die_num');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"supplier is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('supplier');\r",
+									"});\r",
+									"pm.test(\"heat num is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('heat_num');\r",
+									"});\r",
+									"pm.test(\"customer is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('customer');\r",
+									"});\r",
+									"pm.test(\"component_id is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('component_id');\r",
+									"});\r",
+									"pm.test(\"component weight is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('component_weight');\r",
+									"});\r",
+									"pm.test(\"component count is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('component_count');\r",
+									"});\r",
+									"pm.test(\"finished component is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('finished_component');\r",
+									"});\r",
+									"pm.test(\"batch num used is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('batch_num_used');\r",
+									"});\r",
+									"pm.test(\"status is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('status');\r",
+									"});\r",
+									"pm.test(\"process array is Present\", function () {\r",
+									"    pm.expect(jsonData.message).to.have.property('process');\r",
+									"});\r",
+									"if (jsonData.message.process.length === 0) {\r",
+									"    result = false;\r",
+									"} else {\r",
+									"    result = true;\r",
+									"}\r",
+									"pm.test(\"process array contains some data\", function () {\r",
+									"pm.expect(result).to.eql(true);\r",
+									"});\r",
+									"if (Object.keys(jsonData.message.process).length === 0) {\r",
+									"    tests = false;\r",
+									"} else {\r",
+									"    tests = true;\r",
+									"}\r",
+									"pm.test(\"Process contains some data\", function () {\r",
+									"    pm.expect(tests).to.eql(true);\r",
+									"});\r",
+									"pm.test(\"stage_name is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('stage_name');\r",
+									"});\r",
+									"pm.test(\"order  is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('order');\r",
+									"});\r",
+									"pm.test(\"ok_component is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_component');\r",
+									"});\r",
+									"pm.test(\"sub_stage is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('sub_stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"input_stage is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('input_stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"output_stage is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('output_stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"input_enabled is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('input_enabled');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"fifo is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('fifo');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"last_popped_element is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('last_popped_element');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"hold_materials_weight is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('hold_materials_weight');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"ok_end_billets_weight is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_end_billets_weight');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"ok_bits_count is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_count');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"ok_bits_weight is Present inside process\", function () {\r",
+									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_weight');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"op\": \"get_process\",\r\n \"process_name\": \"{{process}}\",\r\n \"unit_num\": \"{{unit_num}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/process-line",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"process-line"
 							]
 						}
 					},
