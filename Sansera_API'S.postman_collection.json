@@ -5103,6 +5103,12 @@
 									"}\r",
 									"pm.test(\"fifo contains some data\", function () {\r",
 									"    pm.expect(tests1).to.eql(true);\r",
+									"});\r",
+									"pm.test(\"element_num is Present inside fifo\", function () {\r",
+									"    pm.expect(jsonData.message.process[8].fifo[0]).to.have.property('element_num');\r",
+									"});\r",
+									"pm.test(\"element_id is Present inside fifo\", function () {\r",
+									"    pm.expect(jsonData.message.process[8].fifo[0]).to.have.property('element_num');\r",
 									"});"
 								],
 								"type": "text/javascript"
