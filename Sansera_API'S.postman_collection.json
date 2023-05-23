@@ -4936,7 +4936,10 @@
 									"\r",
 									"pm.test(\"ok_bits_weight is Present inside process\", function () {\r",
 									"    pm.expect(jsonData.message.process[0]).to.have.property('ok_bits_weight');\r",
-									"});"
+									"});\r",
+									"var res = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"element_num_push_again\", res.message.process[8].fifo[0].element_num);\r",
+									"pm.environment.set(\"element_id_push_again\", res.message.process[8].fifo[0].element_id);"
 								],
 								"type": "text/javascript"
 							}
@@ -5109,7 +5112,14 @@
 									"});\r",
 									"pm.test(\"element_id is Present inside fifo\", function () {\r",
 									"    pm.expect(jsonData.message.process[8].fifo[0]).to.have.property('element_num');\r",
-									"});"
+									"});\r",
+									"pm.test(\"element num is matching\", function () {\r",
+									"    pm.expect(jsonData.message.process[8].fifo[0].element_num).to.eql(pm.environment.get(\"element_num_push_again\"));\r",
+									"});\r",
+									"pm.test(\"element id is matching\", function () {\r",
+									"    pm.expect(jsonData.message.process[8].fifo[0].element_id).to.eql(pm.environment.get(\"element_id_push_again\"));\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
