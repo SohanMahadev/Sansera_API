@@ -1,0 +1,2 @@
+2023-05-25 18:07:23: {"message":"Going to the second topic"}
+2023-05-25 18:13:31: {"message":"Going to the second topic"}
