@@ -71,55 +71,16 @@ async function storeBatteryPercentage(device, batteryPercentage) {
 }
 
 function sendGetBatteryStatusMessage(device) {
-  const batteryPercentage = Math.floor(Math.random() * 101);
   const message = JSON.stringify({ devID: device, data: 'GB' });
   client.publish(publishTopic, message);
   console.log(`GET_BAT_STS message sent for ${device}`);
 
   setTimeout(() => {
-    const responseMessage = JSON.stringify({ devID: device, data: batteryPercentage.toString() });
+    const responseMessage = JSON.stringify({ devID: device, data: 'SimulatedData' });
     client.publish(subscribeTopic, responseMessage);
-    console.log(`Response message sent for ${device} with battery percentage ${batteryPercentage}`);
+    console.log(`Response message sent for ${device} with simulated data`);
   }, 10000);
 }
 
-// API and SERVER setup.
-const app = express();
-const port = 3000;
 
-app.get('/battery-status', async (req, res) => {
-  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-  try {
-    await client.connect();
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
-
-    const latestBatteryStatus = await collection.find().sort({ _id: -1 }).limit(devices.length).toArray();
-
-    const batteryStatusIST = latestBatteryStatus.map(status => ({
-      device: status.device,
-      batteryPercentage: status.batteryPercentage,
-      timestamp: convertEpochToIST(status.timestamp)
-    }));
-
-    res.json(batteryStatusIST);
-  } catch (err) {
-    console.error('Error:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
-  } finally {
-    client.close();
-  }
-});
-//converting Epoch to IST to get the response in IST after API call
-function convertEpochToIST(epochTimestamp) {
-  const date = new Date(epochTimestamp);
-  const istTimestamp = date.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-  return istTimestamp;
-}
-
-
-
-app.listen(port, () => {
-  console.log(`API server is running on http://localhost:${port}`);
-});
+//***************************************************************************************** */
