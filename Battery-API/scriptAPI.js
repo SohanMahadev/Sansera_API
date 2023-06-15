@@ -74,13 +74,4 @@ function sendGetBatteryStatusMessage(device) {
   const message = JSON.stringify({ devID: device, data: 'GB' });
   client.publish(publishTopic, message);
   console.log(`GET_BAT_STS message sent for ${device}`);
-
-  setTimeout(() => {
-    const responseMessage = JSON.stringify({ devID: device, data: 'SimulatedData' });
-    client.publish(subscribeTopic, responseMessage);
-    console.log(`Response message sent for ${device} with simulated data`);
-  }, 10000);
 }
-
-
-//***************************************************************************************** */
