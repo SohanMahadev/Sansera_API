@@ -5,13 +5,17 @@ const moment = require('moment-timezone');
 const mongoose = require('mongoose');
 
 // Schema 
-const batterySchema = new mongoose.Schema({
-  device: String,
-  batteryPercentage: Number,
-  timestamp: { type: Date, default: Date.now }
-}, {
-  collection: 'percentage' 
-});
+const batterySchema = new mongoose.Schema(
+  {
+    device: String,
+    batteryPercentage: Number,
+    timestamp: { type: Number, default: Date.now }
+  },
+  {
+    collection: 'percentage' 
+  }
+);
+
 
 const Battery = mongoose.model('Battery', batterySchema);
 
@@ -53,17 +57,25 @@ client.on('message', (topic, message) => {
   if (topic === subscribeTopic) {
     const payload = JSON.parse(message.toString());
     const device = payload.devID;
-    const batteryPercentage = payload.data;
-    storeBatteryPercentage(device, batteryPercentage);
+
+    // Check if the received device is present in the devices array
+    if (devices.includes(device)) {
+      const batteryPercentage = payload.data;
+      storeBatteryPercentage(device, batteryPercentage);
+    } else {
+      console.log(`Received data for unlisted device: ${device}. so lets ignore`);
+    }
   }
 });
+
 
 async function storeBatteryPercentage(device, batteryPercentage) {
   try {
     await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const document = new Battery({
       device: device,
-      batteryPercentage: batteryPercentage
+      batteryPercentage: batteryPercentage,
+      timestamp: Date.now() //epouch
     });
 
     await document.save();
@@ -74,6 +86,7 @@ async function storeBatteryPercentage(device, batteryPercentage) {
     mongoose.disconnect();
   }
 }
+
 
 function sendGetBatteryStatusMessage(device) {
   const message = JSON.stringify({ devID: device, data: 'GB' });
