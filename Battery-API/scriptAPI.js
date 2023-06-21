@@ -7,15 +7,13 @@ const mongoose = require('mongoose');
 // Schema 
 const batterySchema = new mongoose.Schema(
   {
-    device: String,
-    batteryPercentage: Number,
-    timestamp: { type: Number, default: Date.now }
+  device: String,
+  batteryPercentage: Number,
+  unit_num: String,
+  timestamp: { type: Number, default: Date.now }
   },
-  {
-    collection: 'percentage' 
-  }
-);
-
+  { collection: 'percentage' }
+  );
 
 const Battery = mongoose.model('Battery', batterySchema);
 
@@ -71,21 +69,21 @@ client.on('message', (topic, message) => {
 
 async function storeBatteryPercentage(device, batteryPercentage) {
   try {
-    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    const document = new Battery({
-      device: device,
-      batteryPercentage: batteryPercentage,
-      timestamp: Date.now() //epouch
-    });
-
-    await document.save();
-    console.log(`Battery percentage for ${device} stored in the database.`);
+  await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  const document = new Battery({
+  device: device,
+  batteryPercentage: batteryPercentage,
+  unit_num: 'U-1', // Assign unit_num to U-1
+  timestamp: Date.now() // Epoch
+  });
+  await document.save();
+  console.log(`Battery percentage for ${device} stored in the database.`);
   } catch (err) {
-    console.error('Error:', err);
+  console.error('Error:', err);
   } finally {
-    mongoose.disconnect();
+  mongoose.disconnect();
   }
-}
+  }
 
 
 function sendGetBatteryStatusMessage(device) {
